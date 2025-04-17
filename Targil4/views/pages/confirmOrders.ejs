@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+  <meta charset="UTF-8">
+  <title>הזמנות שממתינות לאישור</title>
+  <link rel="stylesheet" href="/styles/orders-style.css">
+  <link rel="stylesheet" href="/styles/confirm-style.css">
+
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="/order/new">הזמנת סחורה</a></li>
+      <li><a href="/order/confirm">הזמנות שממתינות לאישור</a></li>
+      <li><a href="/order/store/orders">כל ההזמנות</a></li>
+    </ul>
+  </nav>
+
+  <div class="orders-container">
+
+    <h1>הזמנות שממתינות לאישור</h1>
+
+    <% if (orders.length===0) { %>
+      <p>אין הזמנות ממתינות.</p>
+      <% } else { %>
+        <% orders.forEach(order=> {
+          const products = JSON.parse(order.productList);
+          %>
+          <div class="order-card">
+            <div class="order-details">
+              <p>ספק: <%= order.companyName %>
+              </p>
+              <p>נציג: <%= order.representativeName %>
+              </p>
+              <p>מספר טלפון: <%= order.phone %>
+              </p>
+            </div>
+            <div class="order-header">
+              <span>מספר הזמנה: <%= order.id %></span>
+              <span>סה"כ לתשלום: ₪<%= order.totalPrice %></span>
+            </div>
+
+            <table class="products-table">
+              <thead>
+                <tr>
+                  <th>שם המוצר</th>
+                  <th>כמות</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% products.forEach(product=> { %>
+                  <tr>
+                    <td>
+                      <%= product.name %>
+                    </td>
+                    <td>
+                      <%= product.qty %>
+                    </td>
+                  </tr>
+                  <% }); %>
+              </tbody>
+            </table>
+
+            <form action="/order/store/confirm" method="POST">
+              <input type="hidden" name="orderId" value="<%= order.id %>">
+              <button type="submit" class="confirm-btn">אשר קבלת משלוח</button>
+            </form>
+          </div>
+          <% }); %>
+            <% } %>
+  </div>
+</body>
+
+</html>

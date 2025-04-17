@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    background-color: #f0f0f0;
+    display: flex;
+    height: 100vh;
+  }
+
+  .supplier-info {
+    background-color: #d1d1d1;
+    padding: 20px;
+    width: 15%;
+    overflow-y: auto;
+  }
+
+  .supplier-info h2 {
+    margin-top: 0;
+  }
+
+  .product-item {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(32, 31, 31, 0.3);
+  }
+
+
+
+  .order-box {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .order-box pre {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .product-table th, .product-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .product-table th {
+    background-color: #f0f0f0;
+  }
+
+  .approve-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .approve-btn {
+    background-image: url('/styles/images/track.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 125px;
+    height: 65px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+    position: relative;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .approve-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .approve-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .approve-btn:hover .approve-label {
+    opacity: 1;
+  }
+
+  .back-link {
+    margin-top: 20px;
+    display: inline-block;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .supplier-product-table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+background-color: #fff;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.supplier-product-table th, .supplier-product-table td {
+padding: 10px;
+text-align: center;
+border-bottom: 1px solid #ccc;
+}
+
+.supplier-product-table th {
+background-color: #e0e0e0;
+color: #333;
+font-weight: bold;
+}
+
+.supplier-product-table tr:last-child td {
+border-bottom: none;
+}
+.supplier-product-container {
+max-height: 300px;
+overflow-y: auto;
+margin-top: 10px;
+}
+.orders-section {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 70%;
+    overflow-y: auto;
+  }

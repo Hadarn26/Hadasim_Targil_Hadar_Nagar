@@ -1,0 +1,126 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('images/shop.jpg');
+    background-size: cover;
+    background-position: center;
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f0a500;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #222;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+button:hover {
+    background-color: #218838;
+}
+
+.hidden {
+    display: none;
+}
+
+#supplierDetails {
+    background-color: #f1f1f1;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+#productList div {
+    margin-bottom: 10px;
+}
+
+#productList label {
+    display: inline-block;
+    width: 150px;
+}
+
+
+
+#productList label {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

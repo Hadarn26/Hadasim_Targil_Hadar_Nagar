@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>רישום ספק</title>
+  <link rel="stylesheet" href="/styles/register-style.css" />
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <h1>רישום ספק חדש</h1>
+    <form action="/s/register" method="POST">
+      <label>שם החברה:
+        <input type="text" name="companyName" required>
+      </label>
+
+      <label>מספר טלפון:
+        <input type="text" name="phone" required>
+      </label>
+
+      <label>שם נציג:
+        <input type="text" name="representativeName" required>
+      </label>
+
+
+      <label>סיסמה:
+        <input type="password" name="password" id="password" required oninput="validatePasswordLength()" />
+        <div class="password-toggle" onclick="togglePassword()">הצג/הסתר סיסמה</div>
+        <div id="password-error" style="color: red; font-size: 13px; display: none;">הסיסמה חייבת להכיל בין 6 ל־8 תווים.
+        </div>
+      </label>
+
+      <label>רשימת סחורות:</label>
+      <div id="products">
+        <div class="product-field">
+          <button type="button" onclick="addProduct(this)">+</button>
+          <input type="text" placeholder="הכנס פריט" class="product-name" />
+          <input type="number" min="0" step="0.01" placeholder="הכנס מחיר" class="product-price" />
+          <input type="number" min="0" step="1" placeholder="כמות מינימלית לרכישה" min="0" max="10000"
+            class="product-minimum" />
+        </div>
+      </div>
+      <input type="hidden" name="productList" id="productListData" />
+
+
+      <button type="submit">הרשם</button>
+    </form>
+  </div>
+
+  <script src="/scripts/register-script.js"></script>
+
+</body>
+
+</html>

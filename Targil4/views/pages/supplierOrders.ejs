@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>הזמנות שהתקבלו</title>
+  <link rel="stylesheet" href="/styles/supplier-style.css">
+  <link rel="stylesheet" href="/styles/supplierOrders-style.css">
+
+</head>
+<body>
+  <div class="supplier-info">
+    <h2>פרטי הספק</h2>
+    <p><strong>שם נציג:</strong> <%= supplierDetails.representativeName %></p>
+    <p><strong>טלפון:</strong> <%= supplierDetails.phone %></p>
+
+    <h3>מוצרים שהספק מספק:</h3>
+    <div class="supplier-product-container">
+      <table class="supplier-product-table">
+        <thead>
+          <tr>
+            <th>שם המוצר</th>
+            <th>כמות מינימלית</th>
+            <th>מחיר ליחידה (₪)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% JSON.parse(supplierDetails.productList).forEach(product => { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.minimum %></td>
+              <td><%= product.price %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    
+    
+  <div class="orders-section">
+    <h1>שלום, <%= supplierDetails.companyName %>!</h1>
+    <h2>הזמנות ממתינות לאישור:</h2>
+
+    <% if (orders.length === 0) { %>
+      <p>אין הזמנות להצגה כרגע.</p>
+    <% } else { %>
+      <% orders.forEach(order => { %>
+        <div class="order-box">
+          <p><strong>מס' הזמנה:</strong> <%= order.id %></p>
+          <p><strong>תאריך:</strong> <%= new Date(order.orderDate).toLocaleString() %></p>
+          <p><strong>מוצרים:</strong></p>
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>מוצר</th>
+                <th>כמות</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% JSON.parse(order.productList).forEach(item => { %>
+                <tr>
+                  <td><%= item.name %></td>
+                  <td><%= item.qty %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+          <div class="approve-container">
+            <form class="approve-form" data-order-id="<%= order.id %>">
+              <button type="submit" class="approve-btn">
+                <span class="approve-label">שלח הזמנה</span>
+                
+              </button>
+            </form>
+          </div>
+        </div>
+      <% }) %> 
+    <% } %>
+  </div>
+  <script src="/scripts/supplierOrders-script.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+  <meta charset="UTF-8">
+  <title>כל ההזמנות</title>
+  <link rel="stylesheet" href="/styles/orders-style.css">
+  <link rel="stylesheet" href="/styles/historyOrders-style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="/order/new">הזמנת סחורה</a></li>
+      <li><a href="/order/confirm">הזמנות שממתינות לאישור</a></li>
+      <li><a href="/order/store/orders">כל ההזמנות</a></li>
+    </ul>
+  </nav>
+
+  <div class="orders-container">
+    <h1>כל ההזמנות</h1>
+
+
+    <div class="filter-container">
+      <label for="filter">סינון</label>
+      <form name="filter" method="GET" action="/order/store/orders/filter">
+        <label>
+          סטטוס:
+          <select name="status">
+            <option value="">הכל</option>
+            <option value="ממתינה לאישור">ממתינה לאישור</option>
+            <option value="בתהליך">בתהליך</option>
+            <option value="הושלמה">הושלמה</option>
+          </select>
+        </label>
+
+        <label>
+          שם ספק:
+          <input type="text" name="companyName"
+            value="<%= typeof query !== 'undefined' ? query.companyName || '' : '' %>">
+        </label>
+
+        <button type="submit">סנן</button>
+      </form>
+    </div>
+
+
+    <div class="legend">
+      <div><span class="ממתינה"></span>ממתינה לאישור</div>
+      <div><span class="בתהליך"></span>בתהליך</div>
+      <div><span class="הושלמה"></span>הושלמה</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>מספר הזמנה</th>
+          <th>ספק</th>
+          <th>תאריך</th>
+          <th>סכום ששולם</th>
+          <th>המוצרים</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(order=> {
+          let statusClass = '';
+          if (order.status === 'ממתינה לאישור') statusClass = 'status-pending';
+          else if (order.status === 'בתהליך') statusClass = 'status-inprocess';
+          else if (order.status === 'הושלמה') statusClass = 'status-done';
+          %>
+          <tr class="<%= statusClass %>">
+            <td>
+              <%= order.id %>
+            </td>
+            <td>
+              <%= order.companyName %>
+            </td>
+            <td>
+              <%= new Date(order.orderDate).toLocaleDateString('he-IL') %>
+            </td>
+            <td>
+              <%= order.totalPrice %> ₪
+            </td>
+            <td>
+              <table class="inner-table">
+                <thead>
+                  <tr>
+                    <th>שם המוצר</th>
+                    <th>כמות</th>
+                    <th>מחיר ליחידה</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% let orderedProducts=[]; let supplierProducts=[]; try { if (Array.isArray(order.productList) &&
+                    order.productList.length===2) { orderedProducts=JSON.parse(order.productList[0]);
+                    supplierProducts=JSON.parse(order.productList[1]); } } catch (err) { orderedProducts=[];
+                    supplierProducts=[]; } const qtyMap={}; orderedProducts.forEach(p=> {
+                    qtyMap[p.name] = p.qty;
+                    });
+
+                    supplierProducts.forEach(product => {
+                    const quantity = qtyMap[product.name] || 0;
+                    if (quantity > 0) {
+                    %>
+                    <tr>
+                      <td>
+                        <%= product.name %>
+                      </td>
+                      <td>
+                        <%= quantity %>
+                      </td>
+                      <td>
+                        <%= product.price %> ₪
+                      </td>
+                    </tr>
+                    <% } }); %>
+                </tbody>
+              </table>
+            </td>
+
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

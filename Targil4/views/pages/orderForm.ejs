@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <title>הזמנת סחורה</title>
+    <link rel="stylesheet" href="/styles/orders-style.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/order/new">הזמנת סחורה</a></li>
+            <li><a href="/order/confirm">הזמנות שממתינות לאישור</a></li>
+            <li><a href="/order/store/orders">כל ההזמנות</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <% if (typeof success !=='undefined' ) { %>
+            <div id="successMsg" class="success-message">ההזמנה נשלחה בהצלחה!</div>
+            <% } %>
+
+                <h1>הזמנת סחורה</h1>
+
+                <form id="orderForm" method="POST" action="/order/saveOrder">
+                    <label>בחר ספק:</label>
+                    <select name="supplierId" id="supplierSelect" required>
+                        <option value="">-- בחר ספק --</option>
+                        <% suppliers.forEach(s=> { %>
+                            <option value="<%= s.id %>">
+                                <%= s.companyName %>
+                            </option>
+                            <% }) %>
+                    </select>
+
+                    <div id="supplierDetails" class="hidden"></div>
+
+                    <div id="productInputs" class="hidden">
+                        <h3>בחר כמות לכל פריט:</h3>
+                        <div id="productList"></div>
+                    </div>
+                    <input type="hidden" name="totalPrice" id="totalPriceInput">
+
+                    <input type="hidden" name="productList" id="productListInput" />
+                    <button type="submit" class="hidden" id="submitBtn">בצע הזמנה</button>
+                </form>
+    </div>
+    <script src="/scripts/order-script.js"></script>
+
+
+</body>
+
+</html>
